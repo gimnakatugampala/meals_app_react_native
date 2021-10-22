@@ -1,23 +1,17 @@
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import CategoriesScreen from '../screens/CategoriesScreen';
-import CategoryMealsScreen from '../screens/CategoryMealsScreen';
-import MealDetailScreen from '../screens/MealDetailScreen';
+import { createStackNavigator ,createAppContainer } from "react-navigation";
 
 
-const Stack = createStackNavigator();
+import CategoriesScreen from "../screens/CategoriesScreen";
+import CategoryMealsScreen from '../screens/CategoryMealsScreen'
+import MealDetailScreen from '../screens/MealDetailScreen'
 
-export default function MealsNavigator() {
-    return (
-        <NavigationContainer>
-       <Stack.Navigator>
-        <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
-        <Stack.Screen name="CategoryMealsScreen" component={CategoryMealsScreen} />/
-        <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} />
-      </Stack.Navigator>
-      </NavigationContainer>
-    )
-}
 
+const MealsNavigator = createStackNavigator({
+    Categories:CategoriesScreen,
+    CategoryMeals:{
+        screen:CategoryMealsScreen
+    },
+    MealDetail:MealDetailScreen
+})
+
+export default createAppContainer(MealsNavigator)
