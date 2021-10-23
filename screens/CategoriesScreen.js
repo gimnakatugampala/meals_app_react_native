@@ -15,7 +15,7 @@ export default function CategoriesScreen(props) {
                     categoryId:itemData.item.id
                 }})
             }}>
-            <View>
+                <View>
                     <Text>{itemData.item.title}</Text>
                 </View>
             </TouchableOpacity>
@@ -27,13 +27,7 @@ export default function CategoriesScreen(props) {
     )
 }
 
-CategoriesScreen.navigationOptions = {
-    headerTitle :'Meal Categories',
-    headerStyle:{
-        backgroundColor: Platform.OS === 'android'? Colors.primaryColor : 'white'
-    },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
-}
+
 
 const styles = StyleSheet.create({
     screen:{
