@@ -14,6 +14,13 @@ import Colors from '../constants/Colors';
 import FavoritesScreen from '../screens/FavoritesScreen';
 
 
+const defaultStackNavOptions = {
+    headerStyle:{
+        backgroundColor: Platform.OS === 'android'? Colors.primaryColor : 'white'
+    },
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+    headerTitle:'A Screen'
+}
 
 const MealsNavigator = createStackNavigator({
     Categories:{
@@ -27,35 +34,37 @@ const MealsNavigator = createStackNavigator({
     },
     MealDetail:MealDetailScreen
 },{
-    mode:'modal',
-    defaultNavigationOptions:{
-        headerStyle:{
-            backgroundColor: Platform.OS === 'android'? Colors.primaryColor : 'white'
-        },
-        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
-        headerTitle:'A Screen'
-    }
+    // mode:'modal',
+    defaultNavigationOptions:defaultStackNavOptions
 })
 
-// const FavNavigator = createStackNavigator({
-//     Favorites:FavoritesScreen,
-//     MealDetail:MealDetailScreen
-// })
+const FavNavigator = createStackNavigator({
+    Favorites:FavoritesScreen,
+    MealDetail:MealDetailScreen
+},{
+    defaultNavigationOptions:defaultStackNavOptions
+})
 
 const tabConfig = {
-    Meals:{screen:MealsNavigator,navigationOptions:{
+    Meals:{
+        screen:MealsNavigator,
+        navigationOptions:{
         tabBarIcon:(tabInfo) => {
             return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} />
         }, 
-        tabBarIcon:(tabInfo) => {
-            return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} />
-        },
         tabBarColor:Colors.accentColor
 
     }
+    },
+    Favorites:{
+        screen:FavNavigator,
+        navigationOptions:{
+            tabBarIcon:(tabInfo) => {
+                return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} />
+            },
+        }
     }
 }
-
 
 
 const MealsFavTabNavigator = Platform.OS === 'android' ? createMaterialBottomTabNavigator(tabConfig,{
